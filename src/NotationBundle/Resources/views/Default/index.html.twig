@@ -1,0 +1,57 @@
+{% extends 'base.html.twig' %}
+
+{% block title %} Gestion des cours {% endblock %}
+
+{% block main %}
+
+    <div>
+         <a href={{ path('ajout_personne') }}>Ajouter un formateur</a>
+    </div>
+
+    <div>
+        <a href={{ path('ajout_session') }}>Ajouter un cours</a>
+    </div>
+
+    <div>
+        <a href={{ path('ajout_eleve') }}>Ajouter un eleve</a>
+    </div>
+
+    <h1>Les sessions</h1>
+
+
+    {% for session in liste_session %}
+        <a href= {{ path('detail_session', {'id':session.id} )}}>
+            Le cours de {{ session.intitule }} (id:{{ session.id }}
+            commence le : {{ session.dateDebut|date("m/d/Y") }}
+            et se termine le :  {{ session.dateFin|date("m/d/Y") }}
+            par {{ session.enseignant ? session.enseignant.nom : 'Un anonyme' }}
+        </a>
+        <p>{{ session.eleve|length > 0 ? 'elevesinscrit :':'pas d\'inscrit'}}</p>
+        <ul>
+            {% for eleve in session.eleve %}
+                    <li>{{ eleve.prenom }}</li>
+            {% endfor %}
+        </ul>
+
+    {% endfor %}
+
+
+
+
+    <p>Les Profs</p>
+
+    <ul>
+        {% for personne in liste_personne %}
+            <li>{{ personne.nom }} {{ personne.prenom }}</li>
+        {% endfor %}
+    </ul>
+
+    <p>Les Eleves</p>
+
+    <ul>
+        {% for eleve in liste_eleve %}
+            <li>{{ eleve.prenom }}</li>
+        {% endfor %}
+    </ul>
+
+{% endblock %}

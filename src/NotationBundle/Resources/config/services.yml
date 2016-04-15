@@ -1,0 +1,4 @@
+services:
+#    notation.example:
+#        class: NotationBundle\Example
+#        arguments: ["@service_id", "plain_value", %parameter%]
